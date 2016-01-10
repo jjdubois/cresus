@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     CresusCore \
-    CresusGui
+    CresusGui \
+    qjson
