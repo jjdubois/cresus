@@ -3,4 +3,5 @@ TEMPLATE = subdirs
 SUBDIRS += \
     CresusCore \
     CresusGui \
-    qjson
+    qjson \
+    SimpleCrypt
