@@ -9,7 +9,7 @@ class CRESUSCORESHARED_EXPORT OperationData
 {
 public:
     OperationData();
-    OperationData( int value, QDate date, QString label );
+    OperationData( QDate date, const QString& label, int value, const QString& account );
 
     bool isNew() const;
     void setIsNew(bool value);
@@ -26,11 +26,14 @@ public:
     OperationData& operator<<(const QVariantMap& arg);
     QVariantMap& operator>>(QVariantMap& arg);
 
+    QString account() const;
+
 private:
     bool m_isNew;
     int m_value;
     QDate m_date;
     QString m_label;
+    QString m_account;
 };
 
 #endif // OPERATIONDATA_H
