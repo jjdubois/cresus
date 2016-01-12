@@ -30,19 +30,9 @@ int OperationData::value() const
     return m_value;
 }
 
-void OperationData::setValue(int value)
-{
-    m_value = value;
-}
-
 QDate OperationData::date() const
 {
     return m_date;
-}
-
-void OperationData::setDate(const QDate& date)
-{
-    m_date = date;
 }
 
 QString OperationData::label() const
@@ -50,9 +40,9 @@ QString OperationData::label() const
     return m_label;
 }
 
-void OperationData::setLabel(const QString& label)
+QString OperationData::account() const
 {
-    m_label = label;
+    return m_account;
 }
 
 OperationData& OperationData::operator<<(const QVariantMap& arg)
@@ -61,6 +51,7 @@ OperationData& OperationData::operator<<(const QVariantMap& arg)
     m_value = arg.value("value",0).toInt();
     m_date = arg.value("date",QDate()).toDate();
     m_label = arg.value("label",QString()).toString();
+    m_account = arg.value("account",QString()).toString();
 
     return *this;
 }
@@ -71,11 +62,7 @@ QVariantMap&OperationData::operator>>(QVariantMap& arg)
     arg["value"] = m_value;
     arg["date"] = m_date;
     arg["label"] = m_label;
+    arg["account"] = m_account;
 
     return arg;
-}
-
-QString OperationData::account() const
-{
-    return m_account;
 }

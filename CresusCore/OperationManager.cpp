@@ -5,7 +5,6 @@ OperationManager::OperationManager()
 
 }
 
-
 int OperationManager::operationCount() const
 {
     return m_operations.size();

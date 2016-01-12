@@ -15,13 +15,10 @@ public:
     void setIsNew(bool value);
 
     int value() const;
-    void setValue(int value);
 
     QDate date() const;
-    void setDate(const QDate& date);
 
     QString label() const;
-    void setLabel(const QString& label);
 
     OperationData& operator<<(const QVariantMap& arg);
     QVariantMap& operator>>(QVariantMap& arg);

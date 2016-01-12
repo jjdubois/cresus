@@ -15,14 +15,17 @@ SOURCES += \
     Operation.cpp \
     OperationData.cpp \
     OperationManager.cpp \
-    OperationsList.cpp
+    OperationsList.cpp \
+    ImportModule.cpp
 
 HEADERS +=\
-        cresuscore_global.h \
+    cresuscore_global.h \
     Operation.h \
     OperationData.h \
     OperationManager.h \
-    OperationsList.h
+    OperationsList.h \
+    ImportModule.h \
+    OperationList.h
 
 unix {
     target.path = /usr/lib

@@ -4,4 +4,6 @@ SUBDIRS += \
     CresusCore \
     CresusGui \
     qjson \
-    SimpleCrypt
+    SimpleCrypt \
+    BPCsvImportModule \
+    fast-cpp-csv-parser

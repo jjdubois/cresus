@@ -7,7 +7,12 @@
 #include <OperationData.h>
 #include <QSet>
 
-class CRESUSCORESHARED_EXPORT OperationManager : public OperationsList
+#include <OperationList.h>
+#include <Operation.h>
+#include <QMap>
+#include <QUuid>
+
+class CRESUSCORESHARED_EXPORT OperationManager : public OperationList
 {
 public:
     OperationManager();
