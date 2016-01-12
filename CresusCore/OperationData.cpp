@@ -5,11 +5,12 @@ OperationData::OperationData()
 
 }
 
-OperationData::OperationData(int value, QDate date, QString label)
+OperationData::OperationData(QDate date, const QString& label, int value, const QString& account)
     : m_isNew(true)
     , m_value(value)
     , m_date(date)
     , m_label(label)
+    , m_account(account)
 {
 
 }
@@ -72,4 +73,9 @@ QVariantMap&OperationData::operator>>(QVariantMap& arg)
     arg["label"] = m_label;
 
     return arg;
+}
+
+QString OperationData::account() const
+{
+    return m_account;
 }

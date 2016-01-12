@@ -14,13 +14,15 @@ DEFINES += CRESUSCORE_LIBRARY
 SOURCES += \
     Operation.cpp \
     OperationData.cpp \
-    OperationManager.cpp
+    OperationManager.cpp \
+    OperationsList.cpp
 
 HEADERS +=\
         cresuscore_global.h \
     Operation.h \
     OperationData.h \
-    OperationManager.h
+    OperationManager.h \
+    OperationsList.h
 
 unix {
     target.path = /usr/lib
