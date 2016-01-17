@@ -4,6 +4,7 @@
 #include <cresuscore_global.h>
 #include <QDate>
 #include <QVariantMap>
+#include <QMetaType>
 
 class CRESUSCORESHARED_EXPORT OperationData
 {
@@ -32,5 +33,9 @@ private:
     QString m_label;
     QString m_account;
 };
+
+CRESUSCORESHARED_EXPORT QDebug& operator<<( QDebug& debug, const OperationData& data );
+
+Q_DECLARE_METATYPE(OperationData)
 
 #endif // OPERATIONDATA_H

@@ -24,3 +24,10 @@ else:unix: LIBS += -L$$OUT_PWD/../CresusCore/ -lCresusCore
 
 INCLUDEPATH += $$PWD/../CresusCore
 DEPENDPATH += $$PWD/../CresusCore
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../JSonModules/release/ -lJSonModules
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../JSonModules/debug/ -lJSonModules
+else:unix: LIBS += -L$$OUT_PWD/../JSonModules/ -lJSonModules
+
+INCLUDEPATH += $$PWD/../JSonModules
+DEPENDPATH += $$PWD/../JSonModules

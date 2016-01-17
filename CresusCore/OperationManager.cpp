@@ -21,3 +21,9 @@ Operation OperationManager::operation(int index) const
         return Operation();
     }
 }
+
+#include <QDebug>
+void OperationManager::addOperation( const OperationData& data )
+{
+    qDebug()<<"Add "<< data;
+}

@@ -6,4 +6,5 @@ SUBDIRS += \
     qjson \
     SimpleCrypt \
     BPCsvImportModule \
-    fast-cpp-csv-parser
+    fast-cpp-csv-parser \
+    JSonModules

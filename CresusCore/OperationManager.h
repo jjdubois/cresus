@@ -7,18 +7,17 @@
 #include <OperationData.h>
 #include <QSet>
 
-#include <OperationList.h>
+#include <OperationsList.h>
 #include <Operation.h>
 #include <QMap>
 #include <QUuid>
 
-class CRESUSCORESHARED_EXPORT OperationManager : public OperationList
+class CRESUSCORESHARED_EXPORT OperationManager : public OperationsList
 {
 public:
     OperationManager();
 
-    //void addNewOperations( const QList<Operation>& opertions );
-    void addOperation( const QDate& date, const QString& label, int value, const QString& account);
+    void addOperation( const OperationData& data );
 
     // OperationsList interface
     virtual int operationCount() const;

@@ -24,10 +24,13 @@ HEADERS +=\
     OperationData.h \
     OperationManager.h \
     OperationsList.h \
-    ImportModule.h \
-    OperationList.h
+    ImportModule.h
 
 unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+Debug:target.path = $$OUT_PWD/../CresusGui/debug
+Release:target.path = $$OUT_PWD/../CresusGui/release
+INSTALLS += target

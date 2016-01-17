@@ -10,7 +10,7 @@ class CRESUSCORESHARED_EXPORT ImportModule
 public:
     ImportModule();
     virtual ~ImportModule();
-    virtual bool importOperations( OperationManager* manager ) = 0;
+    virtual bool importOperations( OperationManager& manager ) = 0;
 };
 
 #endif // IMPORTMODULE_H

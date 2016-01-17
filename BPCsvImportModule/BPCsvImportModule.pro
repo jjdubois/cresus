@@ -25,5 +25,11 @@ win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CresusCore/release/
 else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CresusCore/debug/ -lCresusCore
 else:unix: LIBS += -L$$OUT_PWD/../CresusCore/ -lCresusCore
 
+Debug:target.path = $$OUT_PWD/../CresusGui/debug
+Release:target.path = $$OUT_PWD/../CresusGui/release
+INSTALLS += target
+
+message($$OUT_PWD)
+
 INCLUDEPATH += $$PWD/../CresusCore
 DEPENDPATH += $$PWD/../CresusCore

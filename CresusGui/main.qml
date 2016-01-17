@@ -9,7 +9,7 @@ ApplicationWindow {
     title: qsTr("Hello World")
 
     OperationsData {
-
+        id:data
     }
 
     menuBar: MenuBar {
@@ -17,7 +17,7 @@ ApplicationWindow {
             title: qsTr("File")
             MenuItem {
                 text: qsTr("&Open")
-                onTriggered: console.log("Open action triggered");
+                onTriggered: data.searchNewOperations();
             }
             MenuItem {
                 text: qsTr("Exit")

@@ -1,4 +1,5 @@
 #include "OperationData.h"
+#include <QDebug>
 
 OperationData::OperationData()
 {
@@ -65,4 +66,9 @@ QVariantMap&OperationData::operator>>(QVariantMap& arg)
     arg["account"] = m_account;
 
     return arg;
+}
+
+QDebug& operator<<( QDebug& debug, const OperationData& data ){
+    debug<<data.date()<<data.label()<<data.value()<<data.account()<<data.isNew();
+    return debug;
 }

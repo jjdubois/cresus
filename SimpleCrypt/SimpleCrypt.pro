@@ -20,3 +20,7 @@ unix {
     target.path = /usr/lib
     INSTALLS += target
 }
+
+Debug:target.path = $$OUT_PWD/../CresusGui/debug
+Release:target.path = $$OUT_PWD/../CresusGui/release
+INSTALLS += target

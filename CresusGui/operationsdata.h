@@ -8,6 +8,11 @@ class OperationsData : public QObject
     Q_OBJECT
 public:
     OperationsData( QObject* parent = NULL );
+
+    Q_INVOKABLE void searchNewOperations();
+private:
+
+    OperationManager m_operations;
 };
 
 #endif // OPERATIONSDATA_H
