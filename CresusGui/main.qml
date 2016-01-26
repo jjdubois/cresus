@@ -26,8 +26,8 @@ ApplicationWindow {
         }
     }
 
-    Label {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
+    OperationListView
+    {
+        anchors.fill: parent
     }
 }
