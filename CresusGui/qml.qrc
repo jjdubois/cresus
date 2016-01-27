@@ -4,5 +4,7 @@
         <file>Operation.qml</file>
         <file>View.qml</file>
         <file>OperationListView.qml</file>
+        <file>OperationListHeader.qml</file>
+        <file>ValueItem.qml</file>
     </qresource>
 </RCC>
