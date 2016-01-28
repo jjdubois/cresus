@@ -6,5 +6,7 @@
         <file>OperationListView.qml</file>
         <file>OperationListHeader.qml</file>
         <file>ValueItem.qml</file>
+        <file>MenuTitle.qml</file>
+        <file>MenuTab.qml</file>
     </qresource>
 </RCC>

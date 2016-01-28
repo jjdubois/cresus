@@ -1,10 +1,9 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    CresusCore \
-    CresusGui \
     qjson \
+    CresusCore \
+    JSonModules \
+    CresusGui \
     SimpleCrypt \
-    BPCsvImportModule \
-    fast-cpp-csv-parser \
-    JSonModules
+    BPCsvImportModule
