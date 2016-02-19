@@ -15,6 +15,9 @@ public:
     virtual int operationCount() const = 0;
     virtual Operation operation( int index ) const = 0;
 
+    virtual QString label()const = 0;
+    virtual QString icon()const=0;
+
 signals:
 
     void beforeAddOperations( const QList<Operation>& operations );

@@ -3,6 +3,7 @@ import QtQuick 2.0
 Item {
 
     id: operationHeader
+    height: 50
     Image {
         id: icon
         width: 50

@@ -5,6 +5,8 @@
 #include <QDate>
 #include <QVariantMap>
 #include <QMetaType>
+#include <QHash>
+#include <QString>
 
 class CRESUSCORESHARED_EXPORT OperationData
 {
@@ -17,14 +19,16 @@ public:
 
     int value() const;
 
-    QDate date() const;
+    const QDate& date() const;
 
-    QString label() const;
+    const QString& label() const;
 
     OperationData& operator<<(const QVariantMap& arg);
     QVariantMap& operator>>(QVariantMap& arg);
 
     QString account() const;
+
+    bool operator==(const OperationData& other)const;
 
 private:
     bool m_isNew;
@@ -35,6 +39,11 @@ private:
 };
 
 CRESUSCORESHARED_EXPORT QDebug& operator<<( QDebug& debug, const OperationData& data );
+
+inline uint qHash(const OperationData &key, uint seed)
+{
+    return qHash(key.label(), seed) ^ key.date().day();
+}
 
 Q_DECLARE_METATYPE(OperationData)
 

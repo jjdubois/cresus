@@ -22,8 +22,21 @@ Operation OperationManager::operation(int index) const
     }
 }
 
-#include <QDebug>
+QString OperationManager::label() const
+{
+    return QString("Toutes opérations");
+}
+
+QString OperationManager::icon() const
+{
+    return QString();
+}
+
 void OperationManager::addOperation( const OperationData& data )
 {
-    qDebug()<<"Add "<< data;
+    if( m_data.contains( data ))
+    {
+        return;
+    }
+    m_operations<< Operation( *this, const_cast<OperationData&>(*m_data.insert(data)) );
 }

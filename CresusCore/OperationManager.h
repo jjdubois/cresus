@@ -10,7 +10,6 @@
 #include <OperationsList.h>
 #include <Operation.h>
 #include <QMap>
-#include <QUuid>
 
 class CRESUSCORESHARED_EXPORT OperationManager : public OperationsList
 {
@@ -23,9 +22,13 @@ public:
     virtual int operationCount() const;
     virtual Operation operation(int index) const;
 
+    QString label() const;
+    QString icon() const;
+
 private:
     QSet< OperationData > m_data;
     QList< Operation > m_operations;
+
 };
 
 #endif // OPERATIONMANAGER_H

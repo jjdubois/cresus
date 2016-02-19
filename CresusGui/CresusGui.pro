@@ -5,10 +5,12 @@ QT += qml quick widgets
 CONFIG += c++11
 
 SOURCES += main.cpp \
-    operationsdata.cpp
+    operationsdata.cpp \
+    operationsmodel.cpp
 
 HEADERS += \
-    operationsdata.h
+    operationsdata.h \
+    operationsmodel.h
 
 RESOURCES += qml.qrc
 
@@ -31,3 +33,10 @@ else:unix: LIBS += -L$$OUT_PWD/../JSonModules/ -lJSonModules
 
 INCLUDEPATH += $$PWD/../JSonModules
 DEPENDPATH += $$PWD/../JSonModules
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../BPCsvImportModule/release/ -lBPCsvImportModule
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../BPCsvImportModule/debug/ -lBPCsvImportModule
+else:unix: LIBS += -L$$OUT_PWD/../BPCsvImportModule/ -lBPCsvImportModule
+
+INCLUDEPATH += $$PWD/../BPCsvImportModule
+DEPENDPATH += $$PWD/../BPCsvImportModule

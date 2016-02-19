@@ -8,5 +8,6 @@
         <file>ValueItem.qml</file>
         <file>MenuTitle.qml</file>
         <file>MenuTab.qml</file>
+        <file>images/shadow.png</file>
     </qresource>
 </RCC>

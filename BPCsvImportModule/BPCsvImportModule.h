@@ -3,21 +3,16 @@
 
 #include "bpcsvimportmodule_global.h"
 
-#include <ImportModule.h>
+#include <AbstractImportModule.h>
 
 #include <QString>
 
-class BPCSVIMPORTMODULESHARED_EXPORT BPCsvImportModule : public ImportModule
+class BPCSVIMPORTMODULESHARED_EXPORT BPCsvImportModule : public AbstractImportModule
 {
-
-    QString m_fileName;
 public:
     BPCsvImportModule();
 
-    QString fileName()const;
-    void setFileName( const QString& fileName );
-
-    virtual bool importOperations(OperationManager *manager);
+    virtual bool importOperations( QIODevice& device, OperationManager& manager );
 };
 
 #endif // BPCSVIMPORTMODULE_H

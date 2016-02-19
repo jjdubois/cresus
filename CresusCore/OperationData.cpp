@@ -31,12 +31,12 @@ int OperationData::value() const
     return m_value;
 }
 
-QDate OperationData::date() const
+const QDate& OperationData::date() const
 {
     return m_date;
 }
 
-QString OperationData::label() const
+const QString& OperationData::label() const
 {
     return m_label;
 }
@@ -44,6 +44,11 @@ QString OperationData::label() const
 QString OperationData::account() const
 {
     return m_account;
+}
+
+bool OperationData::operator==(const OperationData& other) const
+{
+    return  m_value == other.m_value && m_date == other.m_date && m_label == other.m_label && m_account == other.m_account;
 }
 
 OperationData& OperationData::operator<<(const QVariantMap& arg)

@@ -2,21 +2,17 @@
 #define JSONIMPORT_H
 
 #include <jsonmodules_global.h>
-#include <ImportModule.h>
+#include <AbstractImportModule.h>
 
 #include <QIODevice>
 
-class JSONMODULESSHARED_EXPORT JSonImport : public ImportModule
+class JSONMODULESSHARED_EXPORT JSonImport : public AbstractImportModule
 {
-
-    QIODevice* m_io;
 
 public:
     JSonImport();
 
-    virtual bool importOperations( OperationManager& manager );
-    QIODevice *io() const;
-    void setIo(QIODevice *io);
+    virtual bool importOperations(QIODevice& device, OperationManager& manager );
 };
 
 #endif // JSONIMPORT_H
