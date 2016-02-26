@@ -6,11 +6,13 @@ CONFIG += c++11
 
 SOURCES += main.cpp \
     operationsdata.cpp \
-    operationsmodel.cpp
+    operationsmodel.cpp \
+    NewOperationsModel.cpp
 
 HEADERS += \
     operationsdata.h \
-    operationsmodel.h
+    operationsmodel.h \
+    NewOperationsModel.h
 
 RESOURCES += qml.qrc
 
@@ -40,3 +42,10 @@ else:unix: LIBS += -L$$OUT_PWD/../BPCsvImportModule/ -lBPCsvImportModule
 
 INCLUDEPATH += $$PWD/../BPCsvImportModule
 DEPENDPATH += $$PWD/../BPCsvImportModule
+
+win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../CresusCSV/release/ -lCresusCSV
+else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../CresusCSV/debug/ -lCresusCSV
+else:unix: LIBS += -L$$OUT_PWD/../CresusCSV/ -lCresusCSV
+
+INCLUDEPATH += $$PWD/../CresusCSV
+DEPENDPATH += $$PWD/../CresusCSV

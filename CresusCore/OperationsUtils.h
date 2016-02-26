@@ -6,7 +6,7 @@
 namespace Cresus
 {
     CRESUSCORESHARED_EXPORT int amountFromDouble( double value );
-    CRESUSCORESHARED_EXPORT int doubleFromAmount( int value );
+    CRESUSCORESHARED_EXPORT double doubleFromAmount( int value );
 }
 
 #endif // OPERATIONSUTILS_H

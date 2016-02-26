@@ -10,13 +10,13 @@ ApplicationWindow {
     title: qsTr("Hello World")
 
     function initData() {
-        if( data && model )
+        if( operationsData && model )
         {
-            model.setOperationsList( data );
+            model.setOperationsList( operationsData );
         }
     }
-    property OperationsData data : OperationsData{}
-    onDataChanged: initData()
+    property OperationsData operationsData : OperationsData{}
+    onOperationsDataChanged: initData()
     property OperationsModel model : OperationsModel{}
     onModelChanged: initData()
 
@@ -24,7 +24,7 @@ ApplicationWindow {
 
     /* this functions toggles the menu and starts the animation */
     function onMenu() {
-        game_translate_.x = root.menu_shown ? 0 : menuTab.width
+        game_translate_.x = root.menu_shown ? 12 : menuTab.width
         root.menu_shown = !root.menu_shown
     }
 
@@ -33,7 +33,7 @@ ApplicationWindow {
             title: qsTr("File")
             MenuItem {
                 text: qsTr("&Open")
-                onTriggered: data.searchNewOperations()
+                onTriggered: operationsData.searchNewOperations()
             }
             MenuItem {
                 text: qsTr("Exit")
@@ -65,7 +65,7 @@ ApplicationWindow {
             /* this is what moves the normal view aside */
             transform: Translate {
                 id: game_translate_
-                x: 0
+                x: 12
                 Behavior on x {
                     NumberAnimation {
                         duration: 400
@@ -86,7 +86,7 @@ ApplicationWindow {
                 Item {
                     id: viewContainer
 
-                    width: root.width
+                    width: root.width - 12
                     height: root.height - currentOperationsList.height
 
                     property int currentIndex: 0
@@ -105,10 +105,11 @@ ApplicationWindow {
                         Repeater {
                             model: VisualItemModel {
                                 id: itemModel
-                                /*OperationListView {
+                                OperationListView {
                                     height: viewContainer.height
                                     width: viewContainer.width
-                                }*/
+                                    operations : operationsData.currentModel()
+                                }
                                 Rectangle {
                                     height: viewContainer.height
                                     width: viewContainer.width

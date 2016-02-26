@@ -18,7 +18,12 @@ SOURCES += \
     OperationsList.cpp \
     ImportModule.cpp \
     AbstractImportModule.cpp \
-    OperationsUtils.cpp
+    OperationsUtils.cpp \
+    Filter.cpp \
+    FilteredOperationList.cpp \
+    AbstractOperationsList.cpp \
+    SubOperationsList.cpp \
+    ExportModule.cpp
 
 HEADERS +=\
     cresuscore_global.h \
@@ -28,7 +33,12 @@ HEADERS +=\
     OperationsList.h \
     ImportModule.h \
     AbstractImportModule.h \
-    OperationsUtils.h
+    OperationsUtils.h \
+    Filter.h \
+    FilteredOperationList.h \
+    AbstractOperationsList.h \
+    SubOperationsList.h \
+    ExportModule.h
 
 unix {
     target.path = /usr/lib

@@ -4,15 +4,14 @@
 #include <ImportModule.h>
 #include <QSet>
 #include <QString>
+#include <QRegExp>
 
 class CRESUSCORESHARED_EXPORT AbstractImportModule : public ImportModule
 {    
-    QList<QString> m_mimeTypes;
+    QRegExp m_rexExp;
 public:
-    AbstractImportModule( const QList<QString>& extensions );
-    virtual QList<QString> supportedMimeTypes();
-
-
+    AbstractImportModule( const QRegExp& regExp );
+    bool acceptFile( const QFileInfo& file );
 };
 
 #endif // ABSTRACTIMPORTMODULE_H

@@ -7,17 +7,18 @@
 #include <QDir>
 
 #include <jsonimport.h>
+#include <jsonexport.h>
 #include <BPCsvImportModule.h>
 #include <ImportModule.h>
-
+#include <CresusCSV.h>
 #include <QDebug>
+
 OperationsData::OperationsData(QObject *parent) : QObject(parent)
 {
 
     importModules();
     QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
     dataPath += QString("/data.json");
-    qDebug()<<dataPath;
 
     QFile file( dataPath );
     if( file.open( QIODevice::ReadOnly ) )
@@ -25,13 +26,18 @@ OperationsData::OperationsData(QObject *parent) : QObject(parent)
         JSonImport import;
         if( !import.importOperations( file, m_operations ) )
         {
-            qWarning() << "Cannot import operations " << dataPath;
+            qWarning() << "Error importing operations " << dataPath;
         }
+        file.close();
     }
     else
     {
-        qWarning() << "Cannot open file " << dataPath;
+        qWarning() << " Read : cannot open file " << dataPath;
     }
+
+    m_model.setOperationsList( &m_operations );
+
+    searchNewOperations();
 }
 
 void OperationsData::searchNewOperations()
@@ -41,7 +47,13 @@ void OperationsData::searchNewOperations()
     dataPath<<"C:/Documents and Settings/An'so/Mes documents";
     dataPath<<"I:/Data";
 
-    qDebug()<<dataPath;
+    QList<Operation> oldNewOperations;
+
+    for( int i = 0 ; i < m_operations.operationCount() ; ++i )
+    {
+        oldNewOperations<<m_operations.operation( i );
+    }
+
     Q_FOREACH( QString path, dataPath )
     {
         QDir curDir( path );
@@ -50,42 +62,26 @@ void OperationsData::searchNewOperations()
             importFile( fileName );
         }
     }
+
     saveOperations();
+}
+
+OperationsModel*OperationsData::currentModel()
+{
+    return &m_model;
 }
 
 void OperationsData::importFile(const QFileInfo& fileInfo)
 {
-    QMimeDatabase database;
-    QMimeType fileType = database.mimeTypeForFile(fileInfo.filePath());
     QList<ImportModule*> modules;
     // Perfect match
     Q_FOREACH(ImportModule* module, m_importModules)
     {
-        Q_FOREACH(const QString& mimeName, module->supportedMimeTypes() )
+        if( module->acceptFile( fileInfo ) )
         {
-            QMimeType type = database.mimeTypeForName( mimeName );            
-            if( fileType.name() == type.name() || fileType.aliases().contains( type.name() ) )
-            {
-                modules.append( module );
-            }
+            modules.append( module );
         }
     }
-    // Inherits
-    if( modules.isEmpty() )
-    {
-    Q_FOREACH(ImportModule* module, m_importModules)
-    {
-        Q_FOREACH(const QString& mimeName, module->supportedMimeTypes() )
-        {
-            QMimeType type = database.mimeTypeForName( mimeName );            
-            if( fileType.inherits(type.name()) )
-            {
-                modules.append( module );
-            }
-        }
-    }
-    }
-
     if(modules.size() == 1)
     {
         QFile f(fileInfo.filePath());
@@ -107,6 +103,7 @@ void OperationsData::importModules()
 {
     addImportModules( new BPCsvImportModule() );
     addImportModules( new JSonImport );
+    addImportModules( new ImportCresusCSV );
 }
 
 void OperationsData::addImportModules(ImportModule* module)
@@ -117,4 +114,21 @@ void OperationsData::addImportModules(ImportModule* module)
 void OperationsData::saveOperations()
 {
 
+    QString dataPath = QStandardPaths::writableLocation(QStandardPaths::AppDataLocation);
+    dataPath += QString("/data.json");
+    QFile file( dataPath );
+    QFileInfo fileInfo( dataPath );
+    QDir dir( fileInfo.path() );
+    dir.mkpath( fileInfo.path() );
+    if( file.open( QIODevice::WriteOnly ) )
+    {
+        JSonExport exp;
+        if( !exp.exportOperations( file, m_operations ) )
+            qWarning() << "Error exporting operations " << dataPath;
+
+        file.close();
+    }  else
+    {
+        qWarning() << "Cannot open file " << dataPath;
+    }
 }

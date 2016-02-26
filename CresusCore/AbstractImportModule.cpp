@@ -1,11 +1,13 @@
 #include "AbstractImportModule.h"
-
-AbstractImportModule::AbstractImportModule(const QList<QString>& extensions  ) : m_mimeTypes( extensions )
+#include <QFileInfo>
+#include <QDebug>
+AbstractImportModule::AbstractImportModule( const QRegExp& regExp ) : m_rexExp( regExp )
 {
 
 }
 
-QList<QString> AbstractImportModule::supportedMimeTypes()
+bool AbstractImportModule::acceptFile( const QFileInfo& file )
 {
-    return m_mimeTypes;
+    qDebug()<<m_rexExp.pattern()<<file.fileName()<<m_rexExp.exactMatch( file.fileName() );
+    return m_rexExp.exactMatch( file.fileName() );
 }

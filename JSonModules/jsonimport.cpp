@@ -7,10 +7,8 @@
 #include <QDebug>
 #include <QStandardPaths>
 
-JSonImport::JSonImport():AbstractImportModule( QList<QString>()<<"text/plain" )
+JSonImport::JSonImport():AbstractImportModule( QRegExp( ".*\\.json" ) )
 {
-    qDebug()<<QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, QLatin1String("mime/packages"),
-                              QStandardPaths::LocateDirectory);
 }
 
 bool JSonImport::importOperations(QIODevice& device, OperationManager& manager )
@@ -30,4 +28,3 @@ bool JSonImport::importOperations(QIODevice& device, OperationManager& manager )
 
     return true;
 }
-

@@ -2,6 +2,14 @@ import QtQuick 2.0
 
 Item {
     id: operation
+
+    property alias date : date.text
+    property alias label : label.text
+    property alias account : account.text
+    property alias amount : amount.text
+
+    height : 50
+
     Image {
         id: icon
         width: 50
@@ -9,7 +17,7 @@ Item {
         anchors.left: parent.left
         anchors.bottom: parent.bottom
         anchors.top: parent.top
-        source: "qrc:/qtquickplugin/images/template_image.png"
+        //source: "qrc:/qtquickplugin/images/template_image.png"
     }
 
     Text {
@@ -27,6 +35,7 @@ Item {
         anchors.left: icon.right
         anchors.right: date.left
         font.pointSize: 16
+        elide: Text.ElideRight
     }
 
     Text {
@@ -43,6 +52,7 @@ Item {
         text: qsTr("0.0")
         anchors.bottom: parent.bottom
         anchors.right: unit.left
+        anchors.rightMargin: 5
         font.pointSize: 16
     }
 
@@ -51,7 +61,6 @@ Item {
         text: qsTr("€")
         anchors.bottom: parent.bottom
         anchors.right: parent.right
-        font.pointSize: amount.font.pointSize
+        font: amount.font
     }
-
 }

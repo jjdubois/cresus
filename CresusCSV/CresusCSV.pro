@@ -1,20 +1,20 @@
 #-------------------------------------------------
 #
-# Project created by QtCreator 2016-01-10T22:15:03
+# Project created by QtCreator 2016-02-19T22:19:03
 #
 #-------------------------------------------------
 
 QT       -= gui
 
-TARGET = BPCsvImportModule
+TARGET = CresusCSV
 TEMPLATE = lib
 
-DEFINES += BPCSVIMPORTMODULE_LIBRARY
+DEFINES += CRESUSCSV_LIBRARY
 
-SOURCES += BPCsvImportModule.cpp
+SOURCES += CresusCSV.cpp
 
-HEADERS += BPCsvImportModule.h\
-        bpcsvimportmodule_global.h
+HEADERS += CresusCSV.h\
+        cresuscsv_global.h
 
 unix {
     target.path = /usr/lib

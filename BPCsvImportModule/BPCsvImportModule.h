@@ -11,7 +11,6 @@ class BPCSVIMPORTMODULESHARED_EXPORT BPCsvImportModule : public AbstractImportMo
 {
 public:
     BPCsvImportModule();
-
     virtual bool importOperations( QIODevice& device, OperationManager& manager );
 };
 

@@ -11,6 +11,15 @@ class OperationsModel : public QAbstractListModel
     OperationsList* m_operationsList;
 
 public:
+
+    enum OperationRole{
+        IsNew = Qt::UserRole + 1,
+        Value,
+        Date,
+        Label,
+        Account
+    };
+
     explicit OperationsModel(QObject *parent = 0);
 
     // Basic functionality:
@@ -19,6 +28,15 @@ public:
 
     OperationsList *operationsList() const;
     Q_INVOKABLE void setOperationsList(OperationsList *operationsList);
+
+    virtual QHash<int, QByteArray>	roleNames() const;
+private slots:
+
+    void beforeAddOperations();
+    void afterAddOperations( const QList<Operation>& operations );
+
+    void beforeRemoveOperations( const QList<Operation>& operations );
+    void afterRemoveOperations();
 };
 
 #endif // OPERATIONSMODEL_H

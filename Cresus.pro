@@ -6,4 +6,5 @@ SUBDIRS += \
     JSonModules \
     CresusGui \
     SimpleCrypt \
-    BPCsvImportModule
+    BPCsvImportModule \
+    CresusCSV

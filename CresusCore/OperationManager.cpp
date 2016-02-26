@@ -1,42 +1,76 @@
 #include "OperationManager.h"
 
-OperationManager::OperationManager()
+OperationManager::OperationManager() : AbstractOperationsList<SubOperationsList>( NULL )
 {
-
 }
 
-int OperationManager::operationCount() const
+Operation OperationManager::addOperation( const OperationData& data )
 {
-    return m_operations.size();
-}
-
-Operation OperationManager::operation(int index) const
-{
-    if( index < operationCount() && index > -1 )
+    QSet<OperationData>::const_iterator it = m_data.find( data );
+    if( it != m_data.end())
     {
-        return m_operations[index];
+        return Operation( *this, const_cast<OperationData&>(*it) );
     }
-    else
+    Operation op( *this, const_cast<OperationData&>(*m_data.insert(data)) );
+    QList<Operation> operations;
+    operations << op;
+    AbstractOperationsList::addOperation( operations);
+    return op;
+}
+
+void OperationManager::addOperationInCluster(const Operation& operation, SubOperationsList* cluster)
+{
+}
+
+void OperationManager::removeOperationFromCluster(const Operation& operation, SubOperationsList* cluster)
+{
+
+
+//    cluster->inte
+}
+
+void OperationManager::addOperation(const Operation& operation)
+{
+    Q_UNUSED(operation)
+}
+
+void OperationManager::removeOperation(int index)
+{
+    Q_UNUSED(index)
+}
+
+OperationsList*OperationManager::createChild()
+{
+    SubOperationsList* category = new SubOperationsList( *this, *this );
+    addOperationList( *category );
+    return category;
+}
+
+void OperationManager::removeChild(int index)
+{
+    SubOperationsList* category = m_operationsLists.at(index);
+    if( category )
     {
-        return Operation();
+        AbstractOperationsList::removeOperationList( *category );
+        category->deleteLater();
     }
 }
 
-QString OperationManager::label() const
+OperationsList*OperationManager::findCluster(const QStringList& path, bool createIfMissing)
 {
-    return QString("Toutes opérations");
-}
+    QStringList currentPath = path;
+    OperationsList* currentCluster = this;
 
-QString OperationManager::icon() const
-{
-    return QString();
-}
+    while ( currentCluster != NULL && !currentPath.isEmpty()) {
+        OperationsList* cluster = currentCluster->findCluster( currentPath.front() );
+        if( cluster == NULL && createIfMissing )
+        {
+            cluster = currentCluster->createChild();
+            cluster->setLabel( currentPath.front() );
+        }
 
-void OperationManager::addOperation( const OperationData& data )
-{
-    if( m_data.contains( data ))
-    {
-        return;
+        currentPath.pop_front();
+        currentCluster = cluster;
     }
-    m_operations<< Operation( *this, const_cast<OperationData&>(*m_data.insert(data)) );
+    return currentCluster;
 }
